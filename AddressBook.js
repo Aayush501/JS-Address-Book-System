@@ -42,3 +42,11 @@ function validate(Contact) {
     
     return true;
 }
+
+function addContact(contact){
+    if(validate(contact)){
+        addressBook.push(contact);
+        return "Contact Saved !!!";
+    }
+    return "Invalid Contact !!!";
+}
