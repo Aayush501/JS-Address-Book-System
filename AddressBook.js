@@ -128,3 +128,12 @@ function searchPersonByStateOrCity(address) {
 
     return person;
 }
+
+// function to find the number of contacts from a specific address
+function countByAddress(address) {
+    var person = addressBook.filter((contact) => {
+        return (contact.city === address || contact.state === address); 
+    });
+
+    return person.length;
+}
