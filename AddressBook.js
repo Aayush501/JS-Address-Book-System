@@ -1,3 +1,4 @@
+// created contact class
 class Contact {
     constructor(firstName, lastName, address, city, state, zip, phoneNumber, email) {
         this.firstName = firstName;
@@ -11,9 +12,12 @@ class Contact {
     }
 }
 
-const addressBook = [];
+// created addressBook array to store the contacts
+var addressBook = [];
 
+// function to validate the contacts
 function validate(Contact) {
+    // defining the regexes
     const nameRegex = /^[A-Z][a-z]{3,}/;
     const addressRegex = /^.{4,}/;
     const zipRegex = /^\d{6}$/;
@@ -43,6 +47,7 @@ function validate(Contact) {
     return true;
 }
 
+// function to add a new contact to the array 
 function addContact(contact){
     if(validate(contact)){
         addressBook.push(contact);
@@ -51,6 +56,7 @@ function addContact(contact){
     return "Invalid Contact !!!";
 }
 
+// function to edit a contact by finding by its name
 function editContact(existingName, newName) {
     const fullExistingName = existingName.split(" ");
     const existing = addressBook.find(function(contact) {
@@ -66,4 +72,29 @@ function editContact(existingName, newName) {
     existing.lastName = fullNewName[1];
 
     return `Name updated to ${newName}`;
+}
+
+// function to delete a contact
+function findNameAndDelete(fullName) {
+    const fullExistingName = fullName.split(" ");
+
+    const replacable = addressBook.find(function(contact) {
+        return (contact.firstName === fullExistingName[0] && contact.lastName === fullExistingName[1]);
+    });
+
+    if(!replacable){
+        throw "Cannot find contact !!!";
+    }
+    else{
+        console.log("replacable: ")
+        console.log(replacable);
+    }
+
+    addressBook = addressBook.map(function(contact) {
+        if(!(contact.firstName + contact.lastName === replacable.firstName + replacable.lastName)){
+            return contact;
+        }
+    });
+
+    return "Contact Deleted !!!";
 }
