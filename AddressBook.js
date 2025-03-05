@@ -55,7 +55,7 @@ function addContact(contact){
 // function to edit a contact by finding by its name
 function editContact(existingName, newName) {
     const fullExistingName = existingName.split(" ");
-    const existing = addressBook.find(function(contact) {
+    const existing = addressBook.find((contact) => {
         return (contact.firstName === fullExistingName[0] && contact.lastName === fullExistingName[1]);
     });
 
@@ -74,7 +74,7 @@ function editContact(existingName, newName) {
 function findNameAndDelete(fullName) {
     const fullExistingName = fullName.split(" ");
 
-    const replacable = addressBook.find(function(contact) {
+    const replacable = addressBook.find((contact) => {
         return (contact.firstName === fullExistingName[0] && contact.lastName === fullExistingName[1]);
     });
 
@@ -86,7 +86,7 @@ function findNameAndDelete(fullName) {
         console.log(replacable);
     }
 
-    addressBook = addressBook.map(function(contact) {
+    addressBook = addressBook.map((contact) => {
         if(!(contact.firstName + contact.lastName === replacable.firstName + replacable.lastName)){
             return contact;
         }
@@ -97,16 +97,25 @@ function findNameAndDelete(fullName) {
 
 // function to find the number of contacts in the address book
 function numberOfContacts() {
-    var totalContacts = addressBook.reduce(function(a,b){return a+1}, 0);
+    var totalContacts = addressBook.reduce((a,b) => {return a+1}, 0);
     return totalContacts;
 }
 
 // function to ensure no duplicate contacts exist in the array
 function DuplicateCheck(contact){
-    const existing = addressBook.find(function(cont){
+    const existing = addressBook.find((cont) => {
         return (cont.firstName === contact.firstName && contact.lastName === contact.lastName);
     });
 
     if(!existing) return true;
     return false;
+}
+
+// function to search person in a perticular city or state
+function searchPerson(address) {
+    var person = addressBook.filter((contact) => {
+       return (contact.city === address || contact.state === address); 
+    });
+
+    return person;
 }
