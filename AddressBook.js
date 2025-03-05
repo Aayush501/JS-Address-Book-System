@@ -145,3 +145,10 @@ function sortContactByName(){
                  a.lastName.localeCompare(b.lastName) 
     );
 }
+
+// function to sort contacts by City, State, or Zip
+function sortByLocation(attribute){
+    return addressBook.sort(
+        (a,b) => a[attribute].localeCompare(b[attribute])
+    )
+}
