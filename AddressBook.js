@@ -98,3 +98,9 @@ function findNameAndDelete(fullName) {
 
     return "Contact Deleted !!!";
 }
+
+// function to find the number of contacts in the address book
+function numberOfContacts() {
+    var totalContacts = addressBook.reduce(function(a,b){return a+1}, 0);
+    return totalContacts;
+}
