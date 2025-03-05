@@ -50,3 +50,20 @@ function addContact(contact){
     }
     return "Invalid Contact !!!";
 }
+
+function editContact(existingName, newName) {
+    const fullExistingName = existingName.split(" ");
+    const existing = addressBook.find(function(contact) {
+        return (contact.firstName === fullExistingName[0] && contact.lastName === fullExistingName[1]);
+    });
+
+    if(!existing){
+        throw "Name Not Found !!!"
+    }
+
+    const fullNewName = newName.split(" ");
+    existing.firstName = fullNewName[0];
+    existing.lastName = fullNewName[1];
+
+    return `Name updated to ${newName}`;
+}
