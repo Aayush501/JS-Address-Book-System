@@ -137,3 +137,11 @@ function countByAddress(address) {
 
     return person.length;
 }
+
+// function to sort contacts by name
+function sortContactByName(){
+    return addressBook.sort(
+        (a,b) => a.firstName.localeCompare(b.firstName) ||
+                 a.lastName.localeCompare(b.lastName) 
+    );
+}
