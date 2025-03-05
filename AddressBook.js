@@ -32,16 +32,12 @@ function validate(Contact) {
         throw "Address Not Valid";
     }
 
-    if (!zipRegex.test(Contact.zip)) {
+    if (!zipRegex.test(Contact.zip) || !phoneRegex.test(Contact.phoneNumber) || !emailRegex.test(Contact.email)) {
         throw "Invalid Contact Information";
     }
-    
-    if( !phoneRegex.test(Contact.phoneNumber) ){
-        throw "Invalid Contact Information2";
-    }
-    
-    if(!emailRegex.test(Contact.email)){
-        throw "Invalid Contact Information3";
+
+    if(!DuplicateCheck(Contact)){
+        throw "Duplicate Contact Exists !!!"
     }
     
     return true;
@@ -103,4 +99,14 @@ function findNameAndDelete(fullName) {
 function numberOfContacts() {
     var totalContacts = addressBook.reduce(function(a,b){return a+1}, 0);
     return totalContacts;
+}
+
+// function to ensure no duplicate contacts exist in the array
+function DuplicateCheck(contact){
+    const existing = addressBook.find(function(cont){
+        return (cont.firstName === contact.firstName && contact.lastName === contact.lastName);
+    });
+
+    if(!existing) return true;
+    return false;
 }
