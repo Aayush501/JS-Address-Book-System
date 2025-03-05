@@ -119,3 +119,12 @@ function searchPerson(address) {
 
     return person;
 }
+
+// function to search person in a perticular city or state
+function searchPersonByStateOrCity(address) {
+    var person = addressBook.filter((contact) => {
+       return (contact.city === address || contact.state === address); 
+    });
+
+    return person;
+}
